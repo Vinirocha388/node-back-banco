@@ -7,15 +7,15 @@ class TarefaModel {
   };
 
 
-  create = (descricao) => {
-    const novaTarefa = {
-      id: this.tarefas.length + 1,
-      descricao,
-      concluida: false,
-    };
-    this.tarefas.push(novaTarefa);
-    return novaTarefa;
+  create = async (descricao) => {
+    return await prisma.task.create({
+      data: {
+        descricao,
+      },
+    });
   };
+
+
   update = (id, concluida) => {
     const tarefa = this.tarefas.find((t) => t.id === Number(id));
     if (tarefa) {
